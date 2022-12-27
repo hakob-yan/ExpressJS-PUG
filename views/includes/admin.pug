@@ -1,0 +1,20 @@
+extends layout
+
+block body
+    if (articles.length === 0)
+        | There's no published content yet.
+        a(href="/login") Log in
+    else 
+        each article,i in articles 
+            .mb-1(style='margin-top:50px')
+                h2=article.title
+                hr
+                div.d-flex
+                    form(action=`/article/delete/${article._id}` method="POST") 
+                        .mb-1
+                            button.btn.btn-primary.mt-3(type="submit")
+                                i.bi.bi-trash-fill
+                    form(action=`/article/publish/${article._id}` method="POST") 
+                        .mb-1(style='margin-left:20px; ')
+                            button.btn.btn-primary.mt-3(type="submit")
+                                i.bi.bi-play-btn

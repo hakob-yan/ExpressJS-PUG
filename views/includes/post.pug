@@ -1,0 +1,11 @@
+extends layout
+block login 
+  div(style='width:50%; margin: 0 auto')
+    form(action="/create/post" method="POST") 
+      .mb-3 
+        label.form-label(for="exampleInputEmail1") Title
+        input.form-control(type="text" name='title' id="exampleInputEmail1" aria-describedby="emailHelp")
+        .mb-3 
+        label.form-label(for="exampleInputPass1") Text
+        textarea.form-control(type="email" name='text' id="exampleInputPass1" aria-describedby="emailHelp")
+        button.btn.btn-primary.mt-3(type="submit") Submit

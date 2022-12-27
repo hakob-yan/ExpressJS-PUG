@@ -1,4 +1,18 @@
 extends includes/layout
 
 block body
-    div kolaaa
+    if (articles.length === 0)
+        | There's no published content yet.
+        a(href="/login") Log in
+    else 
+        each article,i in articles 
+            if article.published
+                a(href=`/article/${article._id}` style="text-decoration:none")
+                    .card.mb-3 
+                        div(style="height: 150px;background-image:url('https://www.timeoutdubai.com/cloud/timeoutdubai/2021/09/11/udHvbKwV-IMG-Dubai-UAE-1-1200x900.jpg');background-size:cover")
+                        .card-body 
+                            h5.card-title=article.title
+                            p.card-text=article.text
+                            p.card-text 
+                                small.text-muted=`Last updated ${new Date().toLocaleString()} mins ago`
+
