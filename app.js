@@ -1,5 +1,6 @@
 require('dotenv').config();
 const path = require('path');
+const http =require('http')
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
@@ -22,17 +23,28 @@ app.use(express.static('public/'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.get('/',routes.home)
-app.get('/post',routes.post)
-app.post('/create/post',routes.createPost)
-app.get('/admin',routes.admin)
-app.post('/article/publish/:id',routes.articlePublish)
-app.post('/article/delete/:id',routes.articleDelete)
-app.get('/article/:id',routes.article)
+app.get('/', routes.home)
+app.get('/post', routes.post)
+app.post('/create/post', routes.createPost)
+app.get('/admin', routes.admin)
+app.post('/article/publish/:id', routes.articlePublish)
+app.post('/article/delete/:id', routes.articleDelete)
+app.get('/article/:id', routes.article)
 
-
-app.listen(app.get('port'), (req, res) => {
-  console.log('App is listening to 3000');
-
-})
-
+const server = http.createServer(app)
+const boot = function () {
+  server.listen(app.get('port'), function () {
+    console.info(`Express server listening on port${app.get('port')}`)
+  })
+}
+const shutdown = function () {
+  server.close(process.exit)
+}
+if (require.main === module) {
+  boot()
+} else {
+  console.info('Running app as a module')
+  exports.boot = boot
+  exports.shutdown = shutdown
+  exports.port = app.get('port')
+}

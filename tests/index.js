@@ -1,15 +1,27 @@
-const assert = require('assert');
 const superagent = require('superagent')
 const expect = require('expect.js')
-const str = 'a,b,c';
+const boot = require('../app').boot;
+const shutdown = require('../app').shutdown;
+const port = require('../app').port;
+
+const seedArticles = require('../db/articles.json')
 
 
-describe('Str#Split', () => {
- console.log(require.main);
-    it('should respond ok', (done)=>{
-        superagent.get('http://localhost:3000/').end((err,res)=>{
-            expect(res.status).to.equal(200)
+describe('server', () => {
+    before(() => boot())
+    describe('homepage', () => {
+        it('should respond to GET', (done) => {
+            superagent.get(`http://localhost:${port}`).end(
+                (err, res) => {
+                    expect(err).to.be(null);
+                    expect(res.text).to.be.ok;
+                    expect(res.text).not.to.contain(`<h2><a href="/articles`)
+                    // seedArticles.forEach(item=>{
+                    //     console.log(item);
+                    // })
+                }
+            )
             done()
-        });
+        })
     })
 })
