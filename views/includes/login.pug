@@ -1,12 +1,24 @@
 extends layout
 block login 
-    form(action="/login" method="POST") 
-     .mb-3 
-      label.form-label(for="exampleInputEmail1") Email address
-      input.form-control(type="email" id="exampleInputEmail1" aria-describedby="emailHelp")
-      #emailHelp.form-text We'll never share your email with anyone else
-      .mb-3 
-      label.form-label(for="exampleInputPass1") Password
-      input.form-control(type="email" id="exampleInputPass1" aria-describedby="emailHelp")
-      button.btn.btn-primary.mt-3(type="submit") Submit
-      
+
+    form(action="/login" method="POST" style='max-width:400px; margin:0 auto') 
+        if (error) 
+            p(style='color:red')=error
+                .mb-3 
+                    label.form-label(for="exampleInputEmail1") Email address
+                    input.form-control(type="email" id="exampleInputEmail1" aria-describedby="emailHelp" name='username')
+                    #emailHelp.form-text We'll never share your email with anyone else
+                    .mb-3 
+                    label.form-label(for="exampleInputPass1") Password
+                    input.form-control(type="password" id="exampleInputPass1" aria-describedby="emailHelp" name='password')
+                    button.btn.btn-primary.mt-3(type="submit") Log in
+
+        else
+            .mb-3 
+                label.form-label(for="exampleInputEmail1") Email address
+                input.form-control(type="email" id="exampleInputEmail1" aria-describedby="emailHelp" name='username')
+                #emailHelp.form-text We'll never share your email with anyone else
+                .mb-3 
+                label.form-label(for="exampleInputPass1") Password
+                input.form-control(type="password" id="exampleInputPass1" aria-describedby="emailHelp" name='password')
+                button.btn.btn-primary.mt-3(type="submit") Log in
