@@ -14,7 +14,10 @@ exports.login = (req, res, next) => {
         res.render('includes/login')
     }
 }
-
+exports.logout = function (req, res, next) {
+    req.session.destroy()
+    res.redirect('/')
+}
 
 exports.authenticate = async function (req, res, next) {
     const { username, password } = req.body;
@@ -33,7 +36,18 @@ exports.authenticate = async function (req, res, next) {
         return res.render('includes/login', { error: 'Please enter valid email or/and password.' })
     }
 }
-
+exports.createUser = async (req, res, next) => {
+    try {
+        const { username: email, password } = req.body;
+        console.log(email,password);
+        await Users.create({ email, password, admin: false });
+        req.session.auth = true;
+        res.redirect('/')
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
 
 exports.register = async (req, res) => {
     res.render('includes/register')
@@ -55,7 +69,6 @@ exports.createPost = async (req, res) => {
             published: true,
             slug: 'default'
         })
-        console.log(article);
     }
     catch (e) {
         console.log(e);

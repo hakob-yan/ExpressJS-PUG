@@ -29,8 +29,10 @@ app.use(expressSession({ secret: '2C44774A-D649-4D44-9535-46E296EF984F', saveUni
 
 app.get('/', middleware.authenticate, routes.home)
 app.get('/login', routes.login)
+app.get('/logout', routes.logout)
 app.get('/register', routes.register)
-app.get('/post', middleware.authorize, routes.post)
+app.post('/register', routes.createUser)
+app.get('/post', middleware.authenticate, middleware.authorize, routes.post)
 app.post('/create/post', middleware.authorize, routes.createPost)
 app.get('/admin', middleware.authorize, routes.admin)
 app.post('/article/publish/:id', routes.articlePublish)

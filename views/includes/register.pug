@@ -1,12 +1,12 @@
 extends layout
 block login 
-    form(action="/login" method="POST" style='max-width:400px; margin:0 auto') 
+    form(action="/register" method="POST" style='max-width:400px; margin:0 auto') 
      .mb-3 
       label.form-label(for="exampleInputEmail1") Email address
-      input.form-control(type="email" id="exampleInputEmail1" aria-describedby="emailHelp")
+      input.form-control(type="email" id="exampleInputEmail1" name='username' aria-describedby="emailHelp")
       #emailHelp.form-text We'll never share your email with anyone else
       .mb-3 
       label.form-label(for="exampleInputPass1") Password
-      input.form-control(type="email" id="exampleInputPass1" aria-describedby="emailHelp")
+      input.form-control(type="password" id="exampleInputPass1" name='password' aria-describedby="emailHelp")
       button.btn.btn-primary.mt-3(type="submit") Register
         
