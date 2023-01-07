@@ -3,10 +3,21 @@ const { Schema, model } = mongoose;
 
 const ArticleSchema = new Schema(
     {
-        "title": String,
+        "title": {
+            type: String,
+            required: true,
+            validate: {
+                validator: (title) => title !== '',
+                message: "Error:missing fields to be created"
+            }
+        },
         "slug": String,
         "published": Boolean,
-        "text": String
+        "text": {
+            required: true,
+            type: String,
+            set: (v) => v.toLowerCase()
+        }
     }
 )
 

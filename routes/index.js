@@ -39,7 +39,6 @@ exports.authenticate = async function (req, res, next) {
 exports.createUser = async (req, res, next) => {
     try {
         const { username: email, password } = req.body;
-        console.log(email,password);
         await Users.create({ email, password, admin: false });
         req.session.auth = true;
         res.redirect('/')
@@ -63,7 +62,6 @@ exports.post = async (req, res) => {
 
 exports.createPost = async (req, res) => {
     try {
-
         const article = await Articles.create({
             ...req.body,
             published: true,

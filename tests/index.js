@@ -24,4 +24,5 @@ describe('server', () => {
             done()
         })
     })
+    after(()=>shutdown())
 })

@@ -3,8 +3,19 @@ const { Schema, model } = mongoose;
 
 const UserSchema = new Schema(
     {
-        "email": String,
-        "admin": Boolean,
+        "email": {
+            set: v => v.trim().toLowerCase(),
+            validate: {
+                validator: v => v.includes('@'),
+                message: 'Error:Incorrect email'
+            },
+            required: true,
+            type: String,
+        },
+        "admin": {
+            type: Boolean,
+            default: false
+        },
         "password": String
     }
 )

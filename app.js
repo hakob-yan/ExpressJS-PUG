@@ -17,6 +17,8 @@ const VIEWS = path.join(__dirname, 'views')
 mongoose.set('strictQuery', true);
 mongoose.connect(dbUrl).then(() => console.log('Connected!'));
 
+
+
 const app = express();
 app.set('appName', 'hello-advanced');
 app.set('port', PORT);
